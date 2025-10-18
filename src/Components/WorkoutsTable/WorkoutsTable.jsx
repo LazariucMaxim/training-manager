@@ -12,7 +12,7 @@ export default function WorkoutsTable({ deleteWorkout, workouts }) {
                 {Array.isArray(workouts) && workouts.length > 0
                     ? workouts.map((item) => (
                         <div className="workout-list-row" key={item.id}>
-                            <span>{item.date}</span>
+                            <span>{item.date.replace(/(\d{4})-(\d{2})-(\d{2})/, "$3.$2.$1")}</span>
                             <span>{item.distance}</span>
                             <div>
                                 <p className="button-delete"

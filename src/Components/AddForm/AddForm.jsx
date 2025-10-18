@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import { isValidDate, isValidDistance } from "../../utils";
 
 export default function AddForm({ addWorkout, updateDistance }) {
     const initialFormState = { id: null, date: "", distance: "" };
@@ -14,17 +13,9 @@ export default function AddForm({ addWorkout, updateDistance }) {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (!workout.date || !workout.distance) {
-            return alert("Заполните все поля!");
-        } else if (isValidDate(workout.date) === false) {
-            return alert("Введите дату в правильном формате! Пример: 08.08.2023");
-        } else if (isValidDistance(workout.distance) === false) {
-            return alert("Введите дистанцию в правильном формате! Пример: 5.5 км");
-        } else {
-            setWorkout(initialFormState);
-            addWorkout(workout);
-            updateDistance(workout)
-        }
+        setWorkout(initialFormState);
+        addWorkout(workout);
+        updateDistance(workout)
     };
 
     return (
@@ -34,16 +25,20 @@ export default function AddForm({ addWorkout, updateDistance }) {
                 <span className="title-distance">Пройдено км</span>
             </div>
             <input
-                type="text"
+                type="date"
                 name="date"
+                max={new Date().toISOString().split('T')[0]}
                 value={workout.date}
                 onChange={handleInputChange}
+                required
             />
             <input
-                type="text"
+                type="number"
                 name="distance"
+                min="0"
                 value={workout.distance}
                 onChange={handleInputChange}
+                required
             />
             <button className="add-workout">OK</button>
         </form>

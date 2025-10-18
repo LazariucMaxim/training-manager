@@ -17,7 +17,7 @@ export default function App() {
         const existedDate = workouts[dateIndex];
         const newWorkout = {
             ...existedDate,
-            distance: Number(existedDate.distance) + Number(workout.distance)
+            distance: +existedDate.distance + +workout.distance
         };
         const newWorkouts = [...workouts];
         newWorkouts[dateIndex] = newWorkout;
